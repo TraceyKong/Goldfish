@@ -1,4 +1,4 @@
-package com.example.piggybank.Firebase;
+package com.example.piggybank.Firebase.Models;
 
 import androidx.annotation.NonNull;
 

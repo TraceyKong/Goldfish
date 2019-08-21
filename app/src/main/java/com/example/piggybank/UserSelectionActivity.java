@@ -5,16 +5,13 @@ import android.os.Bundle;
 
 import com.example.piggybank.ChildActivities.ChildMainActivity;
 import com.example.piggybank.Firebase.Get;
-import com.example.piggybank.Firebase.User;
+import com.example.piggybank.Firebase.Models.User;
 import com.example.piggybank.ParentActivities.ParentMainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.widget.TextView;
 
 public class UserSelectionActivity extends AppCompatActivity {
 

@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.example.piggybank.Firebase.Get;
 import com.example.piggybank.Firebase.Post;
-import com.example.piggybank.Firebase.User;
+import com.example.piggybank.Firebase.Models.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
