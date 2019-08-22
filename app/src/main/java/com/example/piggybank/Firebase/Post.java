@@ -14,11 +14,13 @@ public class Post {
     public void createUser(final String userId,
                            final String name,
                            final String userType,
+                           final String parentId,
                            final OnSuccessListener<Void> successListener,
                            final OnFailureListener failureListener) {System.out.println(name);
         Map<String, Object> user = new HashMap<>();
         user.put("name", name);
         user.put("userType", userType);
+        user.put("parentId", parentId);
         db.collection("users").document(userId).set(user).addOnSuccessListener(successListener).addOnFailureListener(failureListener);
     }
 }

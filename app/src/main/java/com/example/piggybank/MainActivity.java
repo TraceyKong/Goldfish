@@ -98,9 +98,10 @@ public class MainActivity extends AppCompatActivity {
                         post.createUser(auth.getCurrentUser().getUid(),
                                 userName,
                                 "parent",
+                                "0",
                                 new OnSuccessListener<Void>() {
                                     @Override
-                                    public void onSuccess(Void aVoid) {System.out.println("test1");
+                                    public void onSuccess(Void aVoid) {
                                         Intent intent = new Intent(MainActivity.this, UserSelectionActivity.class);
                                         intent.putExtra("userId",auth.getCurrentUser().getUid());
                                         startActivity(intent);
