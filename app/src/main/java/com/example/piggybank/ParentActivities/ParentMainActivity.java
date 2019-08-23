@@ -1,5 +1,6 @@
 package com.example.piggybank.ParentActivities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -22,4 +23,9 @@ public class ParentMainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
+    public void openCreateChildAccountActivity(View view) {
+        Intent intent = new Intent(ParentMainActivity.this, CreateChildAccountActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

@@ -4,4 +4,11 @@
     <string name="title_activity_parent_main">ParentMainActivity</string>
     <string name="title_activity_child_main">ChildMainActivity</string>
     <string name="loading">Loading...</string>
+    <string name="title_activity_create_child_account">CreateChildAccountActivity</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="create_account">Create Account</string>
+    <string name="child_s_password">Child\'s Password</string>
+    <string name="verify_your_password">Verify Your Password</string>
 </resources>
