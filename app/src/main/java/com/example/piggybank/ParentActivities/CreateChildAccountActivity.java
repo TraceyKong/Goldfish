@@ -97,8 +97,12 @@ public class CreateChildAccountActivity extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 //sign back into parent account
-                                                auth.signInWithCredential(credential);
-                                                finish();
+                                                auth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                                    @Override
+                                                    public void onSuccess(AuthResult authResult) {
+                                                        finish();
+                                                    }
+                                                });
                                             }
                                         }, new OnFailureListener() {
                                             @Override
