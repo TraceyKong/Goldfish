@@ -7,6 +7,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class Get {
 
@@ -37,6 +40,21 @@ public class Get {
 
                 User user = User.SNAPSHOTPARSER.parseSnapshot(documentSnapshot);
                 onSuccessListener.onSuccess(user);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
+
+    public void getChildrenByParentId(final String parentId,
+                            final OnSuccessListener<ArrayList<User>> onSuccessListener,
+                            final OnFailureListener onFailureListener) {
+        db.collection("users").whereEqualTo("parentId", parentId).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                ArrayList<User> lst = new ArrayList<>();
+                for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                    lst.add(User.SNAPSHOTPARSER.parseSnapshot(doc));
+                }
+                onSuccessListener.onSuccess(lst);
             }
         }).addOnFailureListener(onFailureListener);
     }
