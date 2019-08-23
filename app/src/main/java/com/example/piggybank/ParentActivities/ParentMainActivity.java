@@ -54,6 +54,15 @@ public class ParentMainActivity extends AppCompatActivity {
         finish();
     }
 
+
+    @Override
+    public void onResume()
+    {  // After a pause OR at startup
+        super.onResume();
+        makeRV();
+    }
+
+
     public void makeRV() {
         Get get = new Get();
         String parentId = FirebaseAuth.getInstance().getCurrentUser().getUid();
