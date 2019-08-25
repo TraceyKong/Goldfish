@@ -16,11 +16,12 @@ public class Post {
                            final String userType,
                            final String parentId,
                            final OnSuccessListener<Void> successListener,
-                           final OnFailureListener failureListener) {System.out.println(name);
+                           final OnFailureListener failureListener) {
         Map<String, Object> user = new HashMap<>();
         user.put("name", name);
         user.put("userType", userType);
         user.put("parentId", parentId);
+        user.put("balance", 0.00);
         db.collection("users").document(userId).set(user).addOnSuccessListener(successListener).addOnFailureListener(failureListener);
     }
 }

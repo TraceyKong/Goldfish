@@ -98,15 +98,16 @@ public class ParentMainActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ChildHolder holder, int position) {
             final String name = children.get(position).getName();
+            final double balance = children.get(position).getBalance();
             holder.child.setText(name);
             holder.child.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //todo intent to new activity
-
-                    //temp toast
-                    Toast toast = Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT);
-                    toast.show();
+                    Intent intent = new Intent(ParentMainActivity.this, ChildOverviewActivity.class);
+                    intent.putExtra("name", name);
+                    intent.putExtra("balance", balance);
+                    startActivity(intent);
+                    finish();
                 }
             });
         }
