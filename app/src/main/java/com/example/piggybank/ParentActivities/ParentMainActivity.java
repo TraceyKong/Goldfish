@@ -51,7 +51,6 @@ public class ParentMainActivity extends AppCompatActivity {
     public void openCreateChildAccountActivity(View view) {
         Intent intent = new Intent(ParentMainActivity.this, CreateChildAccountActivity.class);
         startActivity(intent);
-        finish();
     }
 
 
