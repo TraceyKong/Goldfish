@@ -7,8 +7,6 @@ import com.example.piggybank.Firebase.Get;
 import com.example.piggybank.Firebase.Models.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,12 +14,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.piggybank.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -103,7 +99,7 @@ public class ParentMainActivity extends AppCompatActivity {
             holder.child.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(ParentMainActivity.this, ChildOverviewActivity.class);
+                    Intent intent = new Intent(ParentMainActivity.this, ChildOverviewParentActivity.class);
                     intent.putExtra("name", name);
                     intent.putExtra("balance", balance);
                     intent.putExtra("childId", childId);

@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.piggybank.R;
 
@@ -64,7 +65,8 @@ public class CreateTaskActivity extends AppCompatActivity {
         }
         else
         {
-
+            Toast toast = Toast.makeText(getApplicationContext(), "Improper entries in fields.", Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 

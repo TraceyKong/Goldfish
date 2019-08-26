@@ -46,4 +46,27 @@ public class Post {
             }
         }).addOnFailureListener(failureListener);
     }
+
+    public void markTaskConfirmed(final String taskId,
+                                  final OnSuccessListener<Void> onSuccessListener,
+                                  final OnFailureListener onFailureListener) {
+        db.collection("tasks").document(taskId).update("status", "confirmed").addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                onSuccessListener.onSuccess(aVoid);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
+
+    public void sendPaymentToChild(final String childId,
+                                   final double payment,
+                                   final OnSuccessListener<Void> onSuccessListener,
+                                   final OnFailureListener onFailureListener) {
+        db.collection("users").document(childId).update("balance", FieldValue.increment(payment)).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                onSuccessListener.onSuccess(aVoid);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
 }

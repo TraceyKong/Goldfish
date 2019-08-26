@@ -24,4 +24,9 @@
     <string name="title_activity_create_task">CreateTaskActivity</string>
     <string name="description">Description</string>
     <string name="payment">Payment</string>
+    <string name="title_activity_task_details_parent">TaskDetailsParentActivity</string>
+    <string name="paymentText">Payment:</string>
+    <string name="mark_task_confirmed_and_pay_due_ammount">Mark Task Confirmed And Pay Due Ammount</string>
+    <string name="temp">temp</string>
+    <string name="status">Status:</string>
 </resources>

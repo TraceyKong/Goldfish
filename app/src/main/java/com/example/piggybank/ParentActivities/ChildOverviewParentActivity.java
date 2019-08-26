@@ -5,10 +5,9 @@ import android.os.Bundle;
 
 import com.example.piggybank.Firebase.Get;
 import com.example.piggybank.Firebase.Models.Task;
+import com.example.piggybank.Firebase.Models.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +25,7 @@ import com.example.piggybank.R;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class ChildOverviewActivity extends AppCompatActivity {
+public class ChildOverviewParentActivity extends AppCompatActivity {
 
     private String childId;
     private final int LIMIT = 4;
@@ -47,10 +45,6 @@ public class ChildOverviewActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView balanceText = findViewById(R.id.balanceParentView);
-        DecimalFormat df = new DecimalFormat("0.00");
-        String balance = df.format(getIntent().getExtras().getDouble("balance"));
-        balanceText.setText("$"+balance);
         String name = getIntent().getExtras().getString("name");
         getSupportActionBar().setTitle(name+"'s Overview");
 
@@ -67,10 +61,37 @@ public class ChildOverviewActivity extends AppCompatActivity {
 
         makeRVTasks();
         makeRVTransactions();
+        childBalance();
+    }
+
+    @Override
+    public void onResume()
+    {  // After a pause OR at startup
+        super.onResume();
+        makeRVTasks();
+        makeRVTransactions();
+        childBalance();
+    }
+
+    public void childBalance() {
+        Get get = new Get();
+        get.getUserById(childId, new OnSuccessListener<User>() {
+            @Override
+            public void onSuccess(User user) {
+                TextView balanceText = findViewById(R.id.balanceParentView);
+                DecimalFormat df = new DecimalFormat("0.00");
+                balanceText.setText("$"+df.format(user.getBalance()));
+            }
+        }, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println(e);
+            }
+        });
     }
 
     public void openTasksActivity(View view) {
-        Intent intent = new Intent(ChildOverviewActivity.this, tasksParentActivity.class);
+        Intent intent = new Intent(ChildOverviewParentActivity.this, TasksParentActivity.class);
         String name = getIntent().getExtras().getString("name");
         intent.putExtra("name", name);
         intent.putExtra("childId", childId);
@@ -78,7 +99,7 @@ public class ChildOverviewActivity extends AppCompatActivity {
     }
 
     public void openTransactionsActivity(View view) {
-        Intent intent = new Intent(ChildOverviewActivity.this, tasksParentActivity.class);//todo transactions
+        Intent intent = new Intent(ChildOverviewParentActivity.this, TasksParentActivity.class);//todo transactions
         String name = getIntent().getExtras().getString("name");
         intent.putExtra("name", name);
         intent.putExtra("childId", childId);
@@ -120,13 +141,28 @@ public class ChildOverviewActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
-            Task task = tasks.get(position);
+            final Task task = tasks.get(position);
             holder.task.setText(task.getName());
             if(task.getStatus().equals("incomplete"))
                 holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_close,0);
-            else
+            if(task.getStatus().equals("completed"))
+                holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_remove,0);
+            if(task.getStatus().equals("confirmed"))
                 holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_done,0);
-            //todo task onclick
+            holder.task.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ChildOverviewParentActivity.this, TaskDetailsParentActivity.class);
+                    intent.putExtra("name", getIntent().getExtras().getString("name"));
+                    intent.putExtra("payment", task.getPayment());
+                    intent.putExtra("status", task.getStatus());
+                    intent.putExtra("taskName", task.getName());
+                    intent.putExtra("description", task.getDescription());
+                    intent.putExtra("id", task.getId());
+                    intent.putExtra("childId", childId);
+                    startActivity(intent);
+                }
+            });
         }
 
         @Override

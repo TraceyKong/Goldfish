@@ -5,11 +5,8 @@ import android.os.Bundle;
 
 import com.example.piggybank.Firebase.Get;
 import com.example.piggybank.Firebase.Models.Task;
-import com.example.piggybank.Firebase.Post;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +23,7 @@ import com.example.piggybank.R;
 
 import java.util.ArrayList;
 
-public class tasksParentActivity extends AppCompatActivity {
+public class TasksParentActivity extends AppCompatActivity {
 
     private String childId;
     private RecyclerView recyclerView;
@@ -50,7 +47,7 @@ public class tasksParentActivity extends AppCompatActivity {
     }
 
     public void openOverviewActivity(View view) {
-        Intent intent = new Intent(tasksParentActivity.this, ChildOverviewActivity.class);
+        Intent intent = new Intent(TasksParentActivity.this, ChildOverviewParentActivity.class);
         String name = getIntent().getExtras().getString("name");
         intent.putExtra("name", name);
         intent.putExtra("childId", childId);
@@ -58,7 +55,7 @@ public class tasksParentActivity extends AppCompatActivity {
     }
 
     public void openTransactionsActivity(View view) {
-        Intent intent = new Intent(tasksParentActivity.this, ChildOverviewActivity.class);//todo transactions
+        Intent intent = new Intent(TasksParentActivity.this, ChildOverviewParentActivity.class);//todo transactions
         String name = getIntent().getExtras().getString("name");
         intent.putExtra("name", name);
         intent.putExtra("childId", childId);
@@ -66,7 +63,7 @@ public class tasksParentActivity extends AppCompatActivity {
     }
 
     public void openCreateTaskActivity(View view) {
-        Intent intent = new Intent(tasksParentActivity.this, CreateTaskActivity.class);
+        Intent intent = new Intent(TasksParentActivity.this, CreateTaskActivity.class);
         intent.putExtra("childId", childId);
         intent.putExtra("name", getIntent().getExtras().getString("name"));
         startActivity(intent);
@@ -110,13 +107,28 @@ public class tasksParentActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
-            Task task = tasks.get(position);
+            final Task task = tasks.get(position);
             holder.task.setText(task.getName());
             if(task.getStatus().equals("incomplete"))
                 holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_close,0);
-            else
+            if(task.getStatus().equals("completed"))
+                holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_remove,0);
+            if(task.getStatus().equals("confirmed"))
                 holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_done,0);
-            //todo task onclick
+            holder.task.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(TasksParentActivity.this, TaskDetailsParentActivity.class);
+                    intent.putExtra("name", getIntent().getExtras().getString("name"));
+                    intent.putExtra("payment", task.getPayment());
+                    intent.putExtra("status", task.getStatus());
+                    intent.putExtra("taskName", task.getName());
+                    intent.putExtra("description", task.getDescription());
+                    intent.putExtra("id", task.getId());
+                    intent.putExtra("childId", childId);
+                    startActivity(intent);
+                }
+            });
         }
 
         @Override
