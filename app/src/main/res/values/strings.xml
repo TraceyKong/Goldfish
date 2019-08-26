@@ -13,4 +13,12 @@
     <string name="verify_your_password">Verify Your Password</string>
     <string name="title_activity_child_overview">ChildOverviewActivity</string>
     <string name="balance">Balance:</string>
+    <string name="title_activity_tasks_parent">tasksParentActivity</string>
+    <string name="tasks">Tasks:</string>
+    <string name="transactions">Transactions:</string>
+    <string name="create_task">Create Task</string>
+    <string name="tasksButton">Tasks</string>
+    <string name="overviewButton">Overview</string>
+    <string name="transactionsButton">Transactions</string>
+    <string name="noMoney">$0.00</string>
 </resources>

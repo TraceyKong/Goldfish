@@ -99,6 +99,7 @@ public class ParentMainActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull ChildHolder holder, int position) {
             final String name = children.get(position).getName();
             final double balance = children.get(position).getBalance();
+            final String childId = children.get(position).getUserId();
             holder.child.setText(name);
             holder.child.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -106,6 +107,7 @@ public class ParentMainActivity extends AppCompatActivity {
                     Intent intent = new Intent(ParentMainActivity.this, ChildOverviewActivity.class);
                     intent.putExtra("name", name);
                     intent.putExtra("balance", balance);
+                    intent.putExtra("childId", childId);
                     startActivity(intent);
                     finish();
                 }

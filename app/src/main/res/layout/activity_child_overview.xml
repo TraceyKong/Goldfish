@@ -23,6 +23,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/common_google_signin_btn_text_dark_focused"
@@ -33,12 +34,13 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/tasksButtonOverview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:text="Button" />
+            android:onClick="openTasksActivity"
+            android:text="@string/tasksButton" />
 
         <TextView
             android:id="@+id/divider1"
@@ -47,12 +49,12 @@
             android:layout_weight="0" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/overviewButtonOverview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:text="Button" />
+            android:text="@string/overviewButton" />
 
         <TextView
             android:id="@+id/divider2"
@@ -61,12 +63,12 @@
             android:layout_weight="0" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/transactionsButtonOverview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:text="Button" />
+            android:text="@string/transactionsButton" />
     </LinearLayout>
 
     <LinearLayout
@@ -92,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="$0.00"
+            android:text="@string/noMoney"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="36sp" />
     </LinearLayout>
@@ -105,5 +107,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/tasks"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bigDivider1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tasksOverviewRV"
+        android:layout_width="0dp"
+        android:layout_height="235dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/bigDivider2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/common_google_signin_btn_text_dark_focused"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tasksOverviewRV" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/transactions"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bigDivider2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/transactionsOverviewRV"
+        android:layout_width="0dp"
+        android:layout_height="235dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

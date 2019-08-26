@@ -1,5 +1,6 @@
 package com.example.piggybank.ParentActivities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -17,6 +18,8 @@ import java.text.DecimalFormat;
 
 public class ChildOverviewActivity extends AppCompatActivity {
 
+    private String childId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,11 +28,31 @@ public class ChildOverviewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         TextView balanceText = findViewById(R.id.balanceParentView);
-        DecimalFormat df = new DecimalFormat("#.##");
+        DecimalFormat df = new DecimalFormat("0.00");
         String balance = df.format(getIntent().getExtras().getDouble("balance"));
         balanceText.setText("$"+balance);
         String name = getIntent().getExtras().getString("name");
-        getSupportActionBar().setTitle(name);
+        getSupportActionBar().setTitle(name+"'s Overview");
+
+        this.childId = getIntent().getExtras().getString("childId");
+    }
+
+    public void openTasksActivity(View view) {
+        Intent intent = new Intent(ChildOverviewActivity.this, tasksParentActivity.class);
+        String name = getIntent().getExtras().getString("name");
+        intent.putExtra("name", name);
+        intent.putExtra("childId", childId);
+        startActivity(intent);
+        finish();
+    }
+
+    public void openTransactionsActivity(View view) {
+        Intent intent = new Intent(ChildOverviewActivity.this, tasksParentActivity.class);
+        String name = getIntent().getExtras().getString("name");
+        intent.putExtra("name", name);
+        intent.putExtra("childId", childId);
+        startActivity(intent);
+        finish();
     }
 
 }
