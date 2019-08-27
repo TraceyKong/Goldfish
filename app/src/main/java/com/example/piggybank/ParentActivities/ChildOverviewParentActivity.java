@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class ChildOverviewParentActivity extends AppCompatActivity {
 
     private String childId;
-    private final int LIMIT = 4;
+    private final int LIMIT = 4;//the maximum limit of items in a recycler view
 
     private RecyclerView recyclerViewTasks;
     private RecyclerView.Adapter adapterTasks;
@@ -44,13 +44,14 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_child_overview);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //title the toolbar
         String name = getIntent().getExtras().getString("name");
         getSupportActionBar().setTitle(name+"'s Overview");
 
+        //record the child's id
         this.childId = getIntent().getExtras().getString("childId");
 
-
+        //recyclerview setup
         recyclerViewTasks = findViewById(R.id.tasksOverviewRV);
         layoutManagerTasks = new LinearLayoutManager(this);
         recyclerViewTasks.setLayoutManager(layoutManagerTasks);
@@ -59,8 +60,11 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
         layoutManagerTransactions = new LinearLayoutManager(this);
         recyclerViewTransactions.setLayoutManager(layoutManagerTransactions);
 
+        //make the recycler views
         makeRVTasks();
         makeRVTransactions();
+
+        //get the current child's balance
         childBalance();
     }
 
@@ -72,7 +76,7 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
         makeRVTransactions();
         childBalance();
     }
-
+    //gets the child's user object and updates the textview with the balance.
     public void childBalance() {
         Get get = new Get();
         get.getUserById(childId, new OnSuccessListener<User>() {
@@ -90,6 +94,7 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
         });
     }
 
+    //opens the TasksParentActivity
     public void openTasksActivity(View view) {
         Intent intent = new Intent(ChildOverviewParentActivity.this, TasksParentActivity.class);
         String name = getIntent().getExtras().getString("name");
@@ -98,6 +103,7 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //opens the TransactionsParentActivity
     public void openTransactionsActivity(View view) {
         Intent intent = new Intent(ChildOverviewParentActivity.this, TasksParentActivity.class);//todo transactions
         String name = getIntent().getExtras().getString("name");
@@ -105,7 +111,7 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
         intent.putExtra("childId", childId);
         startActivity(intent);
     }
-
+    //creates the recycler view for tasks with a maximum limit of the LIMIT latest tasks
     public void makeRVTasks() {
         Get get = new Get();
         get.getTasksByChildId(childId, LIMIT, new OnSuccessListener<ArrayList<Task>>() {
@@ -123,9 +129,10 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
     }
 
     public void makeRVTransactions() {
-
+        //todo make rv
     }
 
+    //the recyclerview adapter for tasks
     private class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> {
 
         private ArrayList<Task> tasks;
@@ -141,14 +148,18 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
+            //get a task
             final Task task = tasks.get(position);
+            //set the name of the task to the textview
             holder.task.setText(task.getName());
+            //add status icon to the right of the textview based on the staus of the task
             if(task.getStatus().equals("incomplete"))
                 holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_close,0);
             if(task.getStatus().equals("completed"))
                 holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_remove,0);
             if(task.getStatus().equals("confirmed"))
                 holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_done,0);
+            //adds onclick to the textview that will open this task's details in a new activity
             holder.task.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

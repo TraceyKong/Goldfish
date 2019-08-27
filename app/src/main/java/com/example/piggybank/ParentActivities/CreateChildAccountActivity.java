@@ -31,6 +31,8 @@ public class CreateChildAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_child_account);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //title toolbar
+        getSupportActionBar().setTitle("Create Child Account");
     }
 
     public void createChildAccount(View view) {
@@ -60,6 +62,7 @@ public class CreateChildAccountActivity extends AppCompatActivity {
     }
 
     private void processChildAccount(final AuthCredential credential) {
+        //get user inputs
         EditText nameInput = findViewById(R.id.childNameInput);
         EditText emailInput = findViewById(R.id.childEmailInput);
         EditText passwordInput = findViewById(R.id.childPasswordInput);
@@ -68,6 +71,7 @@ public class CreateChildAccountActivity extends AppCompatActivity {
         String email = emailInput.getText().toString().trim();
         String password = passwordInput.getText().toString();
 
+        //validate user inputs
         boolean valid = true;
 
         if(name.equals(""))
@@ -100,7 +104,7 @@ public class CreateChildAccountActivity extends AppCompatActivity {
                                                 auth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                                     @Override
                                                     public void onSuccess(AuthResult authResult) {
-                                                        finish();
+                                                        finish();//go back to previous activity
                                                     }
                                                 });
                                             }

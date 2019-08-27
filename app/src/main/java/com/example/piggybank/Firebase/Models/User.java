@@ -11,6 +11,8 @@ public class User {
     private String parentId;
     private String userId;
     private double balance;
+
+    //parses firebase responses into a user
     public final static SnapshotParser<User> SNAPSHOTPARSER = new SnapshotParser<User>() {
         @NonNull
         @Override

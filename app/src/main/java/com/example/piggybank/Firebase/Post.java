@@ -12,6 +12,7 @@ public class Post {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final static String TAG = Post.class.getName();
 
+    //creates user
     public void createUser(final String userId,
                            final String name,
                            final String userType,
@@ -25,7 +26,7 @@ public class Post {
         user.put("balance", 0.00);
         db.collection("users").document(userId).set(user).addOnSuccessListener(successListener).addOnFailureListener(failureListener);
     }
-
+    //creates task
     public void createTask(final String name,
                            final String description,
                            final double payment,
@@ -46,7 +47,7 @@ public class Post {
             }
         }).addOnFailureListener(failureListener);
     }
-
+    //changes a task's status field to confirmed given the task's id
     public void markTaskConfirmed(final String taskId,
                                   final OnSuccessListener<Void> onSuccessListener,
                                   final OnFailureListener onFailureListener) {
@@ -58,6 +59,7 @@ public class Post {
         }).addOnFailureListener(onFailureListener);
     }
 
+    //increments a user's balance by a specified amount given the user's id
     public void sendPaymentToChild(final String childId,
                                    final double payment,
                                    final OnSuccessListener<Void> onSuccessListener,

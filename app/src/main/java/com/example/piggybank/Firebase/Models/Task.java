@@ -16,6 +16,7 @@ public class Task {
     private Date timeAssigned;
     private String id;
 
+    //parses firebase responses into a task
     public final static SnapshotParser<Task> SNAPSHOTPARSER = new SnapshotParser<Task>() {
         @NonNull
         @Override

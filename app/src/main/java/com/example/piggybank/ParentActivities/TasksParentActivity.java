@@ -36,16 +36,18 @@ public class TasksParentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tasks_parent);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //title toolbar
         String name = getIntent().getExtras().getString("name");
         getSupportActionBar().setTitle(name+"'s Tasks");
         this.childId = getIntent().getExtras().getString("childId");
-
+        //setup recyclerview
         recyclerView = findViewById(R.id.tasksRV);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         makeRV();
     }
 
+    //opens the ChildOverviewParentActivity
     public void openOverviewActivity(View view) {
         Intent intent = new Intent(TasksParentActivity.this, ChildOverviewParentActivity.class);
         String name = getIntent().getExtras().getString("name");
@@ -54,6 +56,7 @@ public class TasksParentActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //opens the TransactionsParentActivity
     public void openTransactionsActivity(View view) {
         Intent intent = new Intent(TasksParentActivity.this, ChildOverviewParentActivity.class);//todo transactions
         String name = getIntent().getExtras().getString("name");
@@ -62,6 +65,7 @@ public class TasksParentActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //opens the CreateTaskActivity
     public void openCreateTaskActivity(View view) {
         Intent intent = new Intent(TasksParentActivity.this, CreateTaskActivity.class);
         intent.putExtra("childId", childId);
@@ -69,6 +73,7 @@ public class TasksParentActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //makes the recyclerview for tasks
     private void makeRV() {
         Get get = new Get();
         get.getTasksByChildId(childId, new OnSuccessListener<ArrayList<Task>>() {
@@ -92,6 +97,7 @@ public class TasksParentActivity extends AppCompatActivity {
         makeRV();
     }
 
+    //recyclerview adapter for tasks
     private class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> {
 
         private ArrayList<Task> tasks;
@@ -107,14 +113,18 @@ public class TasksParentActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
+            //get a task
             final Task task = tasks.get(position);
+            //set the name of the task to the textview
             holder.task.setText(task.getName());
+            //add status icon to the right of the textview based on the staus of the task
             if(task.getStatus().equals("incomplete"))
                 holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_close,0);
             if(task.getStatus().equals("completed"))
                 holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_remove,0);
             if(task.getStatus().equals("confirmed"))
                 holder.task.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_done,0);
+            //adds onclick to the textview that will open this task's details in a new activity
             holder.task.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

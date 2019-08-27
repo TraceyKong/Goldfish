@@ -36,7 +36,9 @@ public class ParentMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_parent_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //title toolbar
+        getSupportActionBar().setTitle("Children");
+        //setup recyclerview
         recyclerView = findViewById(R.id.childrenRV);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -57,7 +59,7 @@ public class ParentMainActivity extends AppCompatActivity {
         makeRV();
     }
 
-
+    //make recyclerview of children
     public void makeRV() {
         Get get = new Get();
         String parentId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -74,7 +76,7 @@ public class ParentMainActivity extends AppCompatActivity {
             }
         });
     }
-
+    //recyclerview adapter
     public class ChildrenAdapter extends RecyclerView.Adapter<ChildrenAdapter.ChildHolder> {
 
         private ArrayList<User> children;
@@ -92,10 +94,13 @@ public class ParentMainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ChildHolder holder, int position) {
+            //get child info
             final String name = children.get(position).getName();
             final double balance = children.get(position).getBalance();
             final String childId = children.get(position).getUserId();
+            //set child's name as button text
             holder.child.setText(name);
+            //add onclick to button that will open chld overview in another activity
             holder.child.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -104,7 +109,6 @@ public class ParentMainActivity extends AppCompatActivity {
                     intent.putExtra("balance", balance);
                     intent.putExtra("childId", childId);
                     startActivity(intent);
-                    finish();
                 }
             });
         }

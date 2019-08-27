@@ -19,6 +19,7 @@ public class Get {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final static String TAG = Get.class.getName();
 
+    //gets a user object given the user's id
     public void getUserById(final String userId,
                             final OnSuccessListener<User> onSuccessListener,
                             final OnFailureListener onFailureListener) {
@@ -38,15 +39,13 @@ public class Get {
                     Log.e(TAG, "User with id " + userId + " doesn't exit");
                     onSuccessListener.onSuccess(null);
                 }
-
-
-
                 User user = User.SNAPSHOTPARSER.parseSnapshot(documentSnapshot);
                 onSuccessListener.onSuccess(user);
             }
         }).addOnFailureListener(onFailureListener);
     }
 
+    //gets user object given the parent's id
     public void getChildrenByParentId(final String parentId,
                             final OnSuccessListener<ArrayList<User>> onSuccessListener,
                             final OnFailureListener onFailureListener) {
@@ -62,6 +61,7 @@ public class Get {
         }).addOnFailureListener(onFailureListener);
     }
 
+    //gets an arraylist of tasks given the user's id
     public void getTasksByChildId(final String childId,
                                   final OnSuccessListener<ArrayList<Task>> onSuccessListener,
                                   final OnFailureListener onFailureListener) {
@@ -78,7 +78,7 @@ public class Get {
             }
         }).addOnFailureListener(onFailureListener);
     }
-
+    //gets a limited number of tasks in an arraylist given the user's id and the limit for how many tasks should be queried
     public void getTasksByChildId(final String childId,
                                   final int limit,
                                   final OnSuccessListener<ArrayList<Task>> onSuccessListener,

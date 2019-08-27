@@ -27,19 +27,22 @@ public class CreateTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_task);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //title the toolbar
         String name = getIntent().getExtras().getString("name");
         getSupportActionBar().setTitle("Create a task for "+name);
         this.childId = getIntent().getExtras().getString("childId");
     }
 
+    //creates the task
     public void createTask(View view) {
+        //get user inputs
         EditText nameInput = findViewById(R.id.nameInputTask);
         EditText descriptionInput = findViewById(R.id.descriptionInput);
         EditText paymentInput = findViewById(R.id.paymentInput);
         String name = nameInput.getText().toString().trim();
         String description = descriptionInput.getText().toString().trim();
         String payment = paymentInput.getText().toString().trim();
+        //validate user inputs
         boolean valid = true;
         if(name.equals(""))
             valid = false;
@@ -54,7 +57,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             post.createTask(name, description, paymentDouble, childId, new OnSuccessListener<String>() {
                 @Override
                 public void onSuccess(String s) {
-                    finish();
+                    finish();//go back to previous activity
                 }
             }, new OnFailureListener() {
                 @Override
