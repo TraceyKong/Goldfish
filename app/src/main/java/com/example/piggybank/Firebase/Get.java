@@ -39,8 +39,6 @@ public class Get {
                     Log.e(TAG, "User with id " + userId + " doesn't exit");
                     onSuccessListener.onSuccess(null);
                 }
-                User user = User.SNAPSHOTPARSER.parseSnapshot(documentSnapshot);
-                onSuccessListener.onSuccess(user);
             }
         }).addOnFailureListener(onFailureListener);
     }
