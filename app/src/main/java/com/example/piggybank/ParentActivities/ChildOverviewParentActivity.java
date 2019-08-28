@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class ChildOverviewParentActivity extends AppCompatActivity {
 
     private String childId;
-    private final int LIMIT = 4;//the maximum limit of items in a recycler view
+    private final int LIMIT = 3;//the maximum limit of items in a recycler view
 
     private RecyclerView recyclerViewTasks;
     private RecyclerView.Adapter adapterTasks;
@@ -117,13 +117,18 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
         get.getTasksByChildId(childId, LIMIT, new OnSuccessListener<ArrayList<Task>>() {
             @Override
             public void onSuccess(ArrayList<Task> tasks) {
+                TextView text = findViewById(R.id.noTasks);
+                if(tasks.size() == 0)
+                    text.setVisibility(View.VISIBLE);
+                else
+                    text.setVisibility(View.GONE);
                 adapterTasks = new TasksAdapter(tasks);
                 recyclerViewTasks.setAdapter(adapterTasks);
             }
         }, new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                System.out.println(e);
+                System.out.println("Failed to get tasks "+e);
             }
         });
     }

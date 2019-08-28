@@ -79,6 +79,11 @@ public class TasksParentActivity extends AppCompatActivity {
         get.getTasksByChildId(childId, new OnSuccessListener<ArrayList<Task>>() {
             @Override
             public void onSuccess(ArrayList<Task> tasks) {
+                TextView text = findViewById(R.id.noTasks2);
+                if(tasks.size() == 0)
+                    text.setVisibility(View.VISIBLE);
+                else
+                    text.setVisibility(View.GONE);
                 adapter = new TasksAdapter(tasks);
                 recyclerView.setAdapter(adapter);
             }
