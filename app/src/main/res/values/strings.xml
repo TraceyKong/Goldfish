@@ -34,7 +34,14 @@
     <string name="click_on_a_transaction_to_view_details">Click on a transaction to view details.</string>
     <string name="see_all_transactions">See All Transactions</string>
     <string name="no_transactions_avaliable">No transactions avaliable</string>
-    <string name="no_tasks_avaliable">No tasks avaliable</string>
     <string name="piggybank">PiggyBank</string>
     <string name="create_child_account">Create Child Account</string>
+    <string name="title_activity_transactions_parent">TransactionsParentActivity</string>
+    <string name="create_transaction">Create Transaction</string>
+    <string name="no_tasks_avaliable">No tasks avaliable</string>
+    <string name="title_activity_create_transaction">CreateTransactionActivity</string>
+    <string name="title_activity_transaction_details_parent">TransactionDetailsParentActivity
+    </string>
+    <string name="this_transaction_was_requested_but_not_yet_completed">* This transaction was requested but not yet completed.</string>
+    <string name="complete_transaction">Complete Transaction</string>
 </resources>

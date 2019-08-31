@@ -44,7 +44,7 @@ public class TaskDetailsParentActivity extends AppCompatActivity {
         taskDescription.setText(getIntent().getExtras().getString("description"));
     }
 
-    //if the child has completed the tas this marks the task as confirmed and the adds the payment to the child's balance account
+    //if the child has completed the tas this marks the task as confirmed, then adds the payment to the child's balance account, and creates a positive transaction
     public void markConfirmed(View view)
     {
         //check if task is completed
@@ -59,7 +59,18 @@ public class TaskDetailsParentActivity extends AppCompatActivity {
                     post.sendPaymentToChild(getIntent().getExtras().getString("childId"), getIntent().getExtras().getDouble("payment"), new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            finish();//go back to previous activity
+                            Post post = new Post();
+                            post.createTransaction("Task: "+getIntent().getExtras().getString("taskName"), getIntent().getExtras().getDouble("payment"), "positive", "confirmed", getIntent().getExtras().getString("childId"), new OnSuccessListener<String>() {
+                                @Override
+                                public void onSuccess(String s) {
+                                    finish();//go back to previous activity
+                                }
+                            }, new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    System.out.println(e);
+                                }
+                            });
                         }
                     }, new OnFailureListener() {
                         @Override
@@ -81,5 +92,4 @@ public class TaskDetailsParentActivity extends AppCompatActivity {
             toast.show();
         }
     }
-
 }

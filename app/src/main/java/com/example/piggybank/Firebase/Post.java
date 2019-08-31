@@ -47,6 +47,7 @@ public class Post {
             }
         }).addOnFailureListener(failureListener);
     }
+
     //changes a task's status field to confirmed given the task's id
     public void markTaskConfirmed(final String taskId,
                                   final OnSuccessListener<Void> onSuccessListener,
@@ -65,6 +66,54 @@ public class Post {
                                    final OnSuccessListener<Void> onSuccessListener,
                                    final OnFailureListener onFailureListener) {
         db.collection("users").document(childId).update("balance", FieldValue.increment(payment)).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                onSuccessListener.onSuccess(aVoid);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
+
+    //creates a transaction
+    public void createTransaction(final String item,
+                                  final double cost,
+                                  final String type,
+                                  final String status,
+                                  final String childId,
+                                  final OnSuccessListener<String> onSuccessListener,
+                                  final OnFailureListener onFailureListener) {
+        Map<String, Object> transaction = new HashMap<>();
+        transaction.put("item", item);
+        transaction.put("cost", cost);
+        transaction.put("type", type);
+        transaction.put("status", status);
+        transaction.put("childId", childId);
+        transaction.put("timeStamp", FieldValue.serverTimestamp());
+        db.collection("transactions").add(transaction).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                onSuccessListener.onSuccess(documentReference.getId());
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
+
+    //decreases a user's balance by a specified amount given the user's id
+    public void subtractBalanceFromChild(final String childId,
+                                   final double payment,
+                                   final OnSuccessListener<Void> onSuccessListener,
+                                   final OnFailureListener onFailureListener) {
+        db.collection("users").document(childId).update("balance", FieldValue.increment(payment*(-1))).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                onSuccessListener.onSuccess(aVoid);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
+
+    //changes a transaction's status field to confirmed given the task's id
+    public void markTransactionConfirmed(final String transactionId,
+                                  final OnSuccessListener<Void> onSuccessListener,
+                                  final OnFailureListener onFailureListener) {
+        db.collection("transactions").document(transactionId).update("status", "confirmed").addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 onSuccessListener.onSuccess(aVoid);
