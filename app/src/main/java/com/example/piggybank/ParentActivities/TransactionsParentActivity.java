@@ -141,6 +141,7 @@ public class TransactionsParentActivity extends AppCompatActivity {
                     DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
                     intent.putExtra("date", df.format(transaction.getTimeStamp()));
                     intent.putExtra("id", transaction.getId());
+                    intent.putExtra("name", getIntent().getExtras().getString("name"));
                     startActivity(intent);
                 }
             });
