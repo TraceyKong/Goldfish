@@ -27,6 +27,7 @@ public class Post {
         db.collection("users").document(userId).set(user).addOnSuccessListener(successListener).addOnFailureListener(failureListener);
     }
     //creates task
+    //a child should only be able to mark a status as completed. only a parent can confirm
     public void createTask(final String name,
                            final String description,
                            final double payment,
@@ -74,6 +75,8 @@ public class Post {
     }
 
     //creates a transaction
+    //a child can only mark status as requested. on;y a parent can confirm
+    //type should either be positive or negative. so far only positive transactions come from tasks
     public void createTransaction(final String item,
                                   final double cost,
                                   final String type,
