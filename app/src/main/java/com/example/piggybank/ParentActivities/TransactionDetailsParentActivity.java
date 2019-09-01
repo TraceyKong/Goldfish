@@ -3,6 +3,8 @@ package com.example.piggybank.ParentActivities;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import com.example.piggybank.Firebase.Get;
+import com.example.piggybank.Firebase.Models.User;
 import com.example.piggybank.Firebase.Post;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -16,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.piggybank.R;
 
@@ -67,12 +70,41 @@ public class TransactionDetailsParentActivity extends AppCompatActivity {
     }
 
     //completes requested transaction
-    public void completeTransaction(View view) {//todo not enough balance
-        Post post = new Post();
-        post.markTransactionConfirmed(getIntent().getExtras().getString("id"), new OnSuccessListener<Void>() {
+    public void completeTransaction(View view) {
+        Get get = new Get();
+        get.getUserById(getIntent().getExtras().getString("childId"), new OnSuccessListener<User>() {
             @Override
-            public void onSuccess(Void aVoid) {
-                finish();//go back to previous activity
+            public void onSuccess(User user) {
+                if(user.getBalance() >= getIntent().getExtras().getDouble("cost"))
+                {
+                    final Post post = new Post();
+                    post.markTransactionConfirmed(getIntent().getExtras().getString("id"), new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            post.subtractBalanceFromChild(getIntent().getExtras().getString("childId"), getIntent().getExtras().getDouble("cost"), new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    finish();//go back to previous activity
+                                }
+                            }, new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    System.out.println(e);
+                                }
+                            });
+                        }
+                    }, new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            System.out.println(e);
+                        }
+                    });
+                }
+                else
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Insufficient Balance", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         }, new OnFailureListener() {
             @Override
