@@ -19,7 +19,7 @@ public class UserSelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_selection);
-
+        //redirects to proper activity based on if user is parent or child
         Get get = new Get();
         get.getUserById(getIntent().getExtras().getString("userId"), new OnSuccessListener<User>() {
             @Override

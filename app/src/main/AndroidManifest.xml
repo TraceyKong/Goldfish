@@ -13,9 +13,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ParentActivities.TaskDetailsParentActivity"
+            android:label="@string/title_activity_task_details_parent"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ParentActivities.CreateTaskActivity"
+            android:label="@string/title_activity_create_task"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ParentActivities.TasksParentActivity"
+            android:label="@string/title_activity_tasks_parent"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ParentActivities.ChildOverviewParentActivity"
+            android:label="@string/title_activity_child_overview"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ParentActivities.CreateChildAccountActivity"
             android:label="@string/title_activity_create_child_account"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ChildActivities.ChildMainActivity"
             android:label="@string/title_activity_child_main"

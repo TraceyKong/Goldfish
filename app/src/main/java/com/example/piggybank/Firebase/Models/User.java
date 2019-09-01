@@ -10,6 +10,9 @@ public class User {
     private String userType;
     private String parentId;
     private String userId;
+    private double balance;
+
+    //parses firebase responses into a user
     public final static SnapshotParser<User> SNAPSHOTPARSER = new SnapshotParser<User>() {
         @NonNull
         @Override
@@ -17,15 +20,17 @@ public class User {
             return new User(snapshot.getString("name"),
                     snapshot.getString("userType"),
                     snapshot.getString("parentId"),
+                    snapshot.getDouble("balance"),
                     snapshot.getId());
         }
     };
 
-    public User(String name, String userType, String parentId, String userId){
+    public User(String name, String userType, String parentId, double balance, String userId){
         this.name = name;
         this.userType = userType;
         this.parentId = parentId;
         this.userId = userId;
+        this.balance = balance;
     }
 
     public String getName() {
@@ -38,6 +43,10 @@ public class User {
 
     public String getParentId() {
         return parentId;
+    }
+
+    public double getBalance() {
+        return balance;
     }
 
     public String getUserId() {

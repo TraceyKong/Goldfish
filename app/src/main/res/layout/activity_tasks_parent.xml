@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DB7093"
-    tools:context=".ParentActivities.ParentMainActivity">
+    tools:context=".ParentActivities.TasksParentActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout2"
+        android:id="@+id/appBarLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
@@ -36,29 +36,50 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout4">
+
+        <TextView
+            android:id="@+id/noTasks2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="No tasks avaliable"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="18sp"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/childrenRV"
+            android:id="@+id/tasksRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1" />
+            android:gravity="center"
+            android:text="@string/click_on_a_task_to_view_details" />
 
         <Button
-            android:id="@+id/createChildAccountActivityButton"
-            style="@android:style/Widget.Material.Button.Borderless"
+            android:id="@+id/button"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:onClick="openCreateChildAccountActivity"
-            android:text="@string/create_child_account"
+            android:onClick="openCreateTaskActivity"
+            android:text="@string/create_task"
             android:textColor="@color/design_default_color_primary" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
