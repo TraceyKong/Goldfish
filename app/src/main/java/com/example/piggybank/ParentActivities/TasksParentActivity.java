@@ -47,24 +47,6 @@ public class TasksParentActivity extends AppCompatActivity {
         makeRV();
     }
 
-    //opens the ChildOverviewParentActivity
-    public void openOverviewActivity(View view) {
-        Intent intent = new Intent(TasksParentActivity.this, ChildOverviewParentActivity.class);
-        String name = getIntent().getExtras().getString("name");
-        intent.putExtra("name", name);
-        intent.putExtra("childId", childId);
-        startActivity(intent);
-    }
-
-    //opens the TransactionsParentActivity
-    public void openTransactionsActivity(View view) {
-        Intent intent = new Intent(TasksParentActivity.this, ChildOverviewParentActivity.class);//todo transactions
-        String name = getIntent().getExtras().getString("name");
-        intent.putExtra("name", name);
-        intent.putExtra("childId", childId);
-        startActivity(intent);
-    }
-
     //opens the CreateTaskActivity
     public void openCreateTaskActivity(View view) {
         Intent intent = new Intent(TasksParentActivity.this, CreateTaskActivity.class);
@@ -80,6 +62,7 @@ public class TasksParentActivity extends AppCompatActivity {
             @Override
             public void onSuccess(ArrayList<Task> tasks) {
                 TextView text = findViewById(R.id.noTasks2);
+                //check if there are no tasks and display the no tasks textview if there are none
                 if(tasks.size() == 0)
                     text.setVisibility(View.VISIBLE);
                 else

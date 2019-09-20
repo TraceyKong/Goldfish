@@ -3,6 +3,7 @@ package com.example.piggybank.Firebase;
 import android.util.Log;
 
 import com.example.piggybank.Firebase.Models.Task;
+import com.example.piggybank.Firebase.Models.Transaction;
 import com.example.piggybank.Firebase.Models.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -91,6 +92,43 @@ public class Get {
                     tasks.add(task);
                 }
                 onSuccessListener.onSuccess(tasks);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
+
+    //gets an arraylist of transactions given the user's id
+    public void getTransactionsByChildId(final String childId,
+                                  final OnSuccessListener<ArrayList<Transaction>> onSuccessListener,
+                                  final OnFailureListener onFailureListener) {
+        db.collection("transactions").whereEqualTo("childId", childId).orderBy("timeStamp", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                ArrayList<Transaction> transactions = new ArrayList<>();
+                for(QueryDocumentSnapshot docSnapshot : queryDocumentSnapshots)
+                {
+                    Transaction task = Transaction.SNAPSHOTPARSER.parseSnapshot(docSnapshot);
+                    transactions.add(task);
+                }
+                onSuccessListener.onSuccess(transactions);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
+
+    //gets a limited number of transactions in an arraylist given the user's id and the limit for how many tasks should be queried
+    public void getTransactionsByChildId(final String childId,
+                                         final int limit,
+                                         final OnSuccessListener<ArrayList<Transaction>> onSuccessListener,
+                                         final OnFailureListener onFailureListener) {
+        db.collection("transactions").whereEqualTo("childId", childId).orderBy("timeStamp", Query.Direction.DESCENDING).limit(limit).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                ArrayList<Transaction> transactions = new ArrayList<>();
+                for(QueryDocumentSnapshot docSnapshot : queryDocumentSnapshots)
+                {
+                    Transaction task = Transaction.SNAPSHOTPARSER.parseSnapshot(docSnapshot);
+                    transactions.add(task);
+                }
+                onSuccessListener.onSuccess(transactions);
             }
         }).addOnFailureListener(onFailureListener);
     }

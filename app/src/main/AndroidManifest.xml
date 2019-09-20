@@ -13,9 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ParentActivities.TransactionDetailsParentActivity"
+            android:label="@string/title_activity_transaction_details_parent"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ParentActivities.CreateTransactionActivity"
+            android:label="@string/title_activity_create_transaction"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ParentActivities.TransactionsParentActivity"
+            android:label="@string/title_activity_transactions_parent"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ParentActivities.TaskDetailsParentActivity"
             android:label="@string/title_activity_task_details_parent"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ParentActivities.CreateTaskActivity"
             android:label="@string/title_activity_create_task"
