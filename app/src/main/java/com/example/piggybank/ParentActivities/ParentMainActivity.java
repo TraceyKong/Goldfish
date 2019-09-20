@@ -26,8 +26,8 @@ import java.util.ArrayList;
 
 public class ParentMainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private RecyclerView recyclerView;      //to display a scrolling list of elements
+    private RecyclerView.Adapter adapter;   //bridge between UI and data source
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
