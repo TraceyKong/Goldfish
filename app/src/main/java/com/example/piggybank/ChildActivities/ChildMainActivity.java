@@ -9,10 +9,6 @@ import com.example.piggybank.Firebase.Models.Task;
 import com.example.piggybank.Firebase.Models.Transaction;
 import com.example.piggybank.Firebase.Models.User;
 import com.example.piggybank.Firebase.Models.WishListItem;
-import com.example.piggybank.ParentActivities.ChildOverviewParentActivity;
-import com.example.piggybank.ParentActivities.TasksParentActivity;
-import com.example.piggybank.ParentActivities.TransactionsParentActivity;
-import com.example.piggybank.ParentActivities.WishListParentActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
