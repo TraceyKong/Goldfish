@@ -54,4 +54,9 @@
     <string name="title_activity_tasks_child_overview">TasksChildOverview</string>
     <string name="title_activity_task_details_child">TaskDetailsChildActivity</string>
     <string name="child_task_completed">Complete Task</string>
+    <string name="title_activity_transactions_child">TransactionsChildActivity</string>
+    <string name="request_transaction">Request Transaction</string>
+    <string name="title_activity_request_transaction">RequestTransactionActivity</string>
+    <string name="title_activity_transaction_details_child">TransactionDetailsChildActivity</string>
+    <string name="logout">Log Out</string>
 </resources>

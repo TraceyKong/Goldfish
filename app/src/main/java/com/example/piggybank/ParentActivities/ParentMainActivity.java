@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import com.example.piggybank.Firebase.Get;
 import com.example.piggybank.Firebase.Models.User;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -15,11 +17,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.piggybank.R;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -39,6 +44,7 @@ public class ParentMainActivity extends AppCompatActivity {
         //title toolbar
         getSupportActionBar().setTitle("Children");
 
+
         //setup recyclerview
         recyclerView = findViewById(R.id.childrenRV);
         layoutManager = new LinearLayoutManager(this);
@@ -53,6 +59,23 @@ public class ParentMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_logout:
+                logOut();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public void onResume()
@@ -78,6 +101,18 @@ public class ParentMainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void logOut() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        finish();
+                        moveTaskToBack(true);
+                    }
+                });
+    }
+
     //recyclerview adapter
     public class ChildrenAdapter extends RecyclerView.Adapter<ChildrenAdapter.ChildHolder> {
 

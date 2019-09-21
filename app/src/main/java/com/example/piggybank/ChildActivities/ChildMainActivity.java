@@ -9,6 +9,8 @@ import com.example.piggybank.Firebase.Models.Task;
 import com.example.piggybank.Firebase.Models.Transaction;
 import com.example.piggybank.Firebase.Models.User;
 import com.example.piggybank.Firebase.Models.WishListItem;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -19,6 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -77,6 +81,24 @@ public class ChildMainActivity extends AppCompatActivity {
 
         //get the current child's balance
         childBalance();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_logout:
+                logOut();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -196,6 +218,17 @@ public class ChildMainActivity extends AppCompatActivity {
                 System.out.println(e);
             }
         });
+    }
+
+    private void logOut() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
+                        finish();
+                        moveTaskToBack(true);
+                    }
+                });
     }
 
     private class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> {
