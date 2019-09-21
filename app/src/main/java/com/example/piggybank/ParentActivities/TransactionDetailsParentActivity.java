@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,6 +40,11 @@ public class TransactionDetailsParentActivity extends AppCompatActivity {
         //title toolbar
         String name = getIntent().getExtras().getString("name");
         getSupportActionBar().setTitle(name+"'s Transactions");
+
+        //add return button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         //set task details to textviews
         TextView item = findViewById(R.id.transactionItemNameDetails);
         TextView date = findViewById(R.id.transactionDateDetails);
@@ -67,6 +73,17 @@ public class TransactionDetailsParentActivity extends AppCompatActivity {
         {
             layout.setVisibility(View.GONE);
         }
+    }
+
+    //returns to previous page
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //completes requested transaction
