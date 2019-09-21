@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -62,6 +63,10 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
         //record the child's id
         this.childId = getIntent().getExtras().getString("childId");
 
+        //add return button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         //recyclerview setup
         recyclerViewTasks = findViewById(R.id.tasksOverviewRV);
         layoutManagerTasks = new LinearLayoutManager(this);
@@ -82,6 +87,17 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
 
         //get the current child's balance
         childBalance();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

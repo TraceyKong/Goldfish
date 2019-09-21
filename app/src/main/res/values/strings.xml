@@ -40,8 +40,7 @@
     <string name="create_transaction">Create Transaction</string>
     <string name="no_tasks_avaliable">No tasks avaliable</string>
     <string name="title_activity_create_transaction">CreateTransactionActivity</string>
-    <string name="title_activity_transaction_details_parent">TransactionDetailsParentActivity
-    </string>
+    <string name="title_activity_transaction_details_parent">TransactionDetailsParentActivity</string>
     <string name="this_transaction_was_requested_but_not_yet_completed">* This transaction was requested but not yet completed.</string>
     <string name="complete_transaction">Complete Transaction</string>
     <string name="title_activity_wish_list_parent">WishListParentActivity</string>

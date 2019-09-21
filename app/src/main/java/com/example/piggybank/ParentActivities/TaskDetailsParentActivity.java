@@ -31,6 +31,11 @@ public class TaskDetailsParentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_task_details_parent);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //add return button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         //title toolbar
         String name = getIntent().getExtras().getString("name");
         getSupportActionBar().setTitle(name+"'s Tasks");
@@ -111,6 +116,9 @@ public class TaskDetailsParentActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_delete_task:
                 deleteTask();
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
