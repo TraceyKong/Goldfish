@@ -224,7 +224,7 @@ public class ChildMainActivity extends AppCompatActivity {
             holder.task.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(ChildMainActivity.this, TaskDetailsChildActivity.class);
+                    Intent intent = new Intent(ChildMainActivity.this, TasksChildOverview.class);
                     intent.putExtra("name", getIntent().getExtras().getString("name"));
                     intent.putExtra("payment", task.getPayment());
                     intent.putExtra("status", task.getStatus());
