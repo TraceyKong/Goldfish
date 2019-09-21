@@ -46,6 +46,7 @@ public class ParentMainActivity extends AppCompatActivity {
         makeRV();
     }
 
+    //use of intent: launching an activity/start a new service/broadcasting messages/display a list of contacts in ListView
     public void openCreateChildAccountActivity(View view) {
         Intent intent = new Intent(ParentMainActivity.this, CreateChildAccountActivity.class);
         startActivity(intent);
@@ -98,6 +99,7 @@ public class ParentMainActivity extends AppCompatActivity {
             final String name = children.get(position).getName();
             final double balance = children.get(position).getBalance();
             final String childId = children.get(position).getUserId();
+
             //set child's name as button text
             holder.child.setText(name);
             //add onclick to button that will open chld overview in another activity
@@ -119,7 +121,6 @@ public class ParentMainActivity extends AppCompatActivity {
         }
 
         public class ChildHolder extends RecyclerView.ViewHolder {
-
             private Button child;
             public ChildHolder(@NonNull View itemView) {
                 super(itemView);
