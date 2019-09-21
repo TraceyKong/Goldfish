@@ -2,18 +2,25 @@ package com.example.piggybank.ChildActivities;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.piggybank.Firebase.Post;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.piggybank.R;
 
-public class TaskDetailsChildActivity extends AppCompatActivity {
+import java.text.DecimalFormat;
 
+public class TaskDetailsChildActivity extends AppCompatActivity {
+    private String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +28,32 @@ public class TaskDetailsChildActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //add return button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        //title toolbar
+        String name = getIntent().getExtras().getString("name");
+        getSupportActionBar().setTitle(name+"'s Tasks");
+        //set task details to textviews
+        TextView taskName = findViewById(R.id.taskDetailedNameChild);
+        TextView taskPayment = findViewById(R.id.taskDetailedPaymentChild);
+        TextView taskStatus = findViewById(R.id.taskDetailedStatusChild);
+        TextView taskDescription = findViewById(R.id.taskDetailedDescriptionChild);
+        //formats money to have 2 decimal places
+        DecimalFormat df = new DecimalFormat("0.00");
+        taskName.setText(getIntent().getExtras().getString("taskName"));
+        taskPayment.setText("$"+df.format(getIntent().getExtras().getDouble("payment")));
+        taskStatus.setText(getIntent().getExtras().getString("status"));
+        taskDescription.setText(getIntent().getExtras().getString("description"));
+
+        this.id = getIntent().getExtras().getString("id");
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 }
