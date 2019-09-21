@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.example.piggybank.Firebase.Get;
 import com.example.piggybank.Firebase.Models.User;
-import com.example.piggybank.MainActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -63,7 +62,7 @@ public class ParentMainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_task_details_parent, menu);
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
         return true;
     }
 
