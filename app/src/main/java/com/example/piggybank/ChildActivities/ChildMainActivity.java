@@ -108,7 +108,7 @@ public class ChildMainActivity extends AppCompatActivity {
 
     //opens the TasksParentActivity
     public void openTasksActivity(View view) {
-        Intent intent = new Intent(ChildMainActivity.this, TasksChildActivity.class);
+        Intent intent = new Intent(ChildMainActivity.this, TasksChildOverview.class);
         String name = getIntent().getExtras().getString("name");
         intent.putExtra("name", name);
         intent.putExtra("childId", childId);
