@@ -13,9 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ChildActivities.TaskDetailsChildActivity"
+            android:label="@string/title_activity_task_details_child"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ChildActivities.TasksChildOverview"
             android:label="@string/title_activity_tasks_child_overview"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ParentActivities.WishListItemDetailsParentActivity"
             android:label="@string/title_activity_wish_list_item_details_parent"
