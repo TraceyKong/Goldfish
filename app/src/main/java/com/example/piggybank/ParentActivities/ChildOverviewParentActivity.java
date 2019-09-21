@@ -185,7 +185,7 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
 
     public void makeRVWishList() {
         Get get = new Get();
-        get.getWishListItemsByChildId(childId, new OnSuccessListener<ArrayList<WishListItem>>() {
+        get.getWishListItemsByChildId(childId, LIMIT, new OnSuccessListener<ArrayList<WishListItem>>() {
             @Override
             public void onSuccess(ArrayList<WishListItem> items) {
                 TextView text = findViewById(R.id.noWishListItems);
