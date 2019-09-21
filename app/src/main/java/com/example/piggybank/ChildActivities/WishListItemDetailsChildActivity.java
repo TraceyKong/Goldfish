@@ -8,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -27,6 +28,10 @@ public class WishListItemDetailsChildActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Wish List");
         this.childId = getIntent().getExtras().getString("childId");
 
+        //add return button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         TextView item = findViewById(R.id.wishListItemNameDetailsChild);
         TextView cost = findViewById(R.id.wishListItemCostDetailsChild);
 
@@ -34,4 +39,14 @@ public class WishListItemDetailsChildActivity extends AppCompatActivity {
         cost.setText("$"+getIntent().getExtras().getDouble("cost"));
     }
 
+    //returns to previous page
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

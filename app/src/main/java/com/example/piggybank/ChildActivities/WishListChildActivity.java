@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -42,6 +43,11 @@ public class WishListChildActivity extends AppCompatActivity {
         //title toolbar
         getSupportActionBar().setTitle("Wish List");
         this.childId = getIntent().getExtras().getString("childId");
+
+        //add return button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         //setup recyclerview
         recyclerView = findViewById(R.id.wishlistRVChild2);
         layoutManager = new LinearLayoutManager(this);
@@ -49,6 +55,16 @@ public class WishListChildActivity extends AppCompatActivity {
         makeRV();
     }
 
+    //returns to previous page
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public void openCreateWishListItemActivity(View view) {
         Intent intent = new Intent(WishListChildActivity.this, CreateWishListItemActivity.class);
