@@ -123,4 +123,23 @@ public class Post {
             }
         }).addOnFailureListener(onFailureListener);
     }
+
+    //creates a wish list item
+    public void createWishListItem(final String item,
+                                   final double cost,
+                                   final String childId,
+                                   final OnSuccessListener<String> onSuccessListener,
+                                   final OnFailureListener onFailureListener) {
+        Map<String, Object> wish = new HashMap<>();
+        wish.put("item", item);
+        wish.put("cost", cost);
+        wish.put("childId", childId);
+        db.collection("wishList").add(wish).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                onSuccessListener.onSuccess(documentReference.getId());
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
 }
+

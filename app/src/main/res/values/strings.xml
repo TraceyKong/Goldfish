@@ -44,4 +44,11 @@
     </string>
     <string name="this_transaction_was_requested_but_not_yet_completed">* This transaction was requested but not yet completed.</string>
     <string name="complete_transaction">Complete Transaction</string>
+    <string name="title_activity_wish_list_parent">WishListParentActivity</string>
+    <string name="click_on_an_item_to_view_details">Click on an item to view details.</string>
+    <string name="no_wish_list_items_avaliable">No wish list items avaliable</string>
+    <string name="wish_list">Wish List:</string>
+    <string name="see_entire_wish_list">See entire wish list</string>
+    <string name="title_activity_wish_list_item_details_parent">WishListItemDetailsParentActivity
+    </string>
 </resources>
