@@ -13,6 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ChildActivities.TaskDetailsChildActivity"
+            android:label="@string/title_activity_task_details_child"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChildActivities.TasksChildOverview"
+            android:label="@string/title_activity_tasks_child_overview"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ChildActivities.TransactionDetailsChildActivity"
             android:label="@string/title_activity_transaction_details_child"
             android:theme="@style/AppTheme.NoActionBar"></activity>
