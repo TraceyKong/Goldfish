@@ -13,9 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ChildActivities.TransactionDetailsChildActivity"
+            android:label="@string/title_activity_transaction_details_child"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ChildActivities.RequestTransactionActivity"
+            android:label="@string/title_activity_request_transaction"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChildActivities.TransactionsChildActivity"
+            android:label="@string/title_activity_transactions_child"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ParentActivities.WishListItemDetailsParentActivity"
             android:label="@string/title_activity_wish_list_item_details_parent"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ParentActivities.WishListParentActivity"
             android:label="@string/title_activity_wish_list_parent"

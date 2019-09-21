@@ -1,4 +1,4 @@
-package com.example.piggybank.ParentActivities;
+package com.example.piggybank.ChildActivities;
 
 import android.os.Bundle;
 
@@ -20,26 +20,25 @@ import android.widget.Toast;
 
 import com.example.piggybank.R;
 
-public class CreateTransactionActivity extends AppCompatActivity {
+public class RequestTransactionActivity extends AppCompatActivity {
 
     private String childId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_transaction);
+        setContentView(R.layout.activity_request_transaction);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        String name = getIntent().getExtras().getString("name");
-        getSupportActionBar().setTitle("Create a transaction for "+name);
+        getSupportActionBar().setTitle("Request Transaction");
         this.childId = getIntent().getExtras().getString("childId");
     }
 
     //create a new negative transaction
     public void createTransaction(View view) {
         //get user inputs
-        EditText itemText = findViewById(R.id.itemName);
-        EditText costText = findViewById(R.id.itemCost);
+        EditText itemText = findViewById(R.id.itemNameChild);
+        EditText costText = findViewById(R.id.itemCostChild);
         final String item = itemText.getText().toString().trim();
         String cost = costText.getText().toString().trim();
         //validate
@@ -59,20 +58,10 @@ public class CreateTransactionActivity extends AppCompatActivity {
                     if(user.getBalance() >= costDouble)
                     {
                         final Post post = new Post();
-                        post.createTransaction(item, costDouble, "negative", "confirmed", childId, new OnSuccessListener<String>() {
+                        post.createTransaction(item, costDouble, "negative", "requested", childId, new OnSuccessListener<String>() {
                             @Override
                             public void onSuccess(String s) {
-                                post.subtractBalanceFromChild(childId, costDouble, new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        finish(); //go back to previous activity
-                                    }
-                                }, new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        System.out.println(e);
-                                    }
-                                });
+                                finish();
                             }
                         }, new OnFailureListener() {
                             @Override

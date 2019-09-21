@@ -51,5 +51,9 @@
     <string name="title_activity_wish_list_item_details_parent">WishListItemDetailsParentActivity
     </string>
     <string name="delete_this_task">Delete This Task</string>
+    <string name="title_activity_transactions_child">TransactionsChildActivity</string>
+    <string name="request_transaction">Request Transaction</string>
+    <string name="title_activity_request_transaction">RequestTransactionActivity</string>
+    <string name="title_activity_transaction_details_child">TransactionDetailsChildActivity</string>
     <string name="logout">Log Out</string>
 </resources>
