@@ -35,26 +35,24 @@
             android:id="@+id/childOverview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8sp"
-            android:layout_marginTop="8sp"
-            android:layout_marginEnd="8sp"
-            android:background="#DB7093"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/balanceText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="50dp"
                 android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textBalance"
-                    android:layout_width="173dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
                     android:text="@string/balance"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="36sp" />
@@ -73,8 +71,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8sp"
-                android:layout_marginBottom="8sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
                 android:orientation="vertical">
 
@@ -85,7 +84,7 @@
                     android:layout_marginLeft="4dp"
                     android:text="@string/tasks"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="30sp" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/noTasksChild"
@@ -121,29 +120,36 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:drawableEnd="@drawable/ic_keyboard_arrow_down_black_18dp"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
                     android:text="@string/see_all_tasks"
-                    android:textColor="@color/design_default_color_primary" />
+                    android:textColor="@color/design_default_color_primary"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView23"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
                     android:text="@string/transactions"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="30sp" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/noTransactionsChild"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8sp"
+                    android:layout_marginLeft="8dp"
                     android:text="@string/no_transactions_avaliable"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="18sp"
@@ -153,6 +159,9 @@
                     android:id="@+id/transactionsRVChild"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
                     tools:itemCount="3"
                     tools:listitem="3">
 
@@ -160,42 +169,50 @@
 
                 <TextView
                     android:id="@+id/textView28"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
                     android:text="@string/click_on_a_transaction_to_view_details" />
 
                 <Button
                     android:id="@+id/button3"
+                    style="@android:style/Widget.Material.Light.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:drawableEnd="@drawable/ic_keyboard_arrow_down_black_18dp"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
                     android:text="@string/see_all_transactions"
-                    android:textColor="@color/design_default_color_primary" />
+                    android:textColor="@color/design_default_color_primary"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView30"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
                     android:text="@string/wish_list"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="30sp" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/noWishlistItemsChild"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8sp"
+                    android:layout_marginLeft="8dp"
                     android:text="@string/no_wish_list_items_avaliable"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="18sp"
@@ -205,20 +222,34 @@
                     android:id="@+id/wishlistRVChild"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
                     tools:itemCount="3"
                     tools:listitem="3">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/click_on_an_item_to_view_details" />
+
                 <Button
                     android:id="@+id/button4"
+                    style="@android:style/Widget.Material.Light.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:drawableEnd="@drawable/ic_keyboard_arrow_down_black_18dp"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
                     android:text="@string/see_entire_wish_list"
-                    android:textColor="@color/design_default_color_primary" />
+                    android:textColor="@color/design_default_color_primary"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
