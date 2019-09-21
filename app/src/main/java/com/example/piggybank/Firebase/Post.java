@@ -141,5 +141,17 @@ public class Post {
             }
         }).addOnFailureListener(onFailureListener);
     }
+
+    //deletes a task
+    public void deleteTask(final String taskId,
+                           final OnSuccessListener<Void> onSuccessListener,
+                           final OnFailureListener onFailureListener) {
+        db.collection("tasks").document(taskId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                onSuccessListener.onSuccess(aVoid);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
 }
 
