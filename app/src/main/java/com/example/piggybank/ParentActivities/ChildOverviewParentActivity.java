@@ -8,6 +8,8 @@ import com.example.piggybank.Firebase.Get;
 import com.example.piggybank.Firebase.Models.Task;
 import com.example.piggybank.Firebase.Models.Transaction;
 import com.example.piggybank.Firebase.Models.User;
+import com.example.piggybank.Firebase.Models.WishListItem;
+import com.example.piggybank.Firebase.Post;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -43,6 +45,10 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterTransactions;
     private RecyclerView.LayoutManager layoutManagerTransactions;
 
+    private RecyclerView recyclerViewWishList;
+    private RecyclerView.Adapter adapterWishList;
+    private RecyclerView.LayoutManager layoutManagerWishList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +71,14 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
         layoutManagerTransactions = new LinearLayoutManager(this);
         recyclerViewTransactions.setLayoutManager(layoutManagerTransactions);
 
+        recyclerViewWishList = findViewById(R.id.wishListOverviewRV);
+        layoutManagerWishList = new LinearLayoutManager(this);
+        recyclerViewWishList.setLayoutManager(layoutManagerWishList);
+
         //make the recycler views
         makeRVTasks();
         makeRVTransactions();
+        makeRVWishList();
 
         //get the current child's balance
         childBalance();
@@ -79,6 +90,7 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
         super.onResume();
         makeRVTasks();
         makeRVTransactions();
+        makeRVWishList();
         childBalance();
     }
     //gets the child's user object and updates the textview with the balance.
@@ -116,6 +128,16 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
         intent.putExtra("childId", childId);
         startActivity(intent);
     }
+
+    //opens the WishListParentActivity
+    public void openWishListActivity(View view) {
+        Intent intent = new Intent(ChildOverviewParentActivity.this, WishListParentActivity.class);
+        String name = getIntent().getExtras().getString("name");
+        intent.putExtra("name", name);
+        intent.putExtra("childId", childId);
+        startActivity(intent);
+    }
+
     //creates the recycler view for tasks with a maximum limit of the LIMIT latest tasks
     public void makeRVTasks() {
         Get get = new Get();
@@ -151,6 +173,29 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
                     text.setVisibility(View.GONE);
                 adapterTransactions = new TransactionsAdapter(transactions);
                 recyclerViewTransactions.setAdapter(adapterTransactions);
+
+            }
+        }, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println(e);
+            }
+        });
+    }
+
+    public void makeRVWishList() {
+        Get get = new Get();
+        get.getWishListItemsByChildId(childId, LIMIT, new OnSuccessListener<ArrayList<WishListItem>>() {
+            @Override
+            public void onSuccess(ArrayList<WishListItem> items) {
+                TextView text = findViewById(R.id.noWishListItems);
+                //check if there are no transactions and display the no transactions textview if there are none
+                if(items.size() == 0)
+                    text.setVisibility(View.VISIBLE);
+                else
+                    text.setVisibility(View.GONE);
+                adapterWishList = new WishListItemAdapter(items);
+                recyclerViewWishList.setAdapter(adapterWishList);
 
             }
         }, new OnFailureListener() {
@@ -264,6 +309,7 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ChildOverviewParentActivity.this, TransactionDetailsParentActivity.class);
+                    intent.putExtra("name", getIntent().getExtras().getString("name"));
                     intent.putExtra("item", transaction.getItem());
                     intent.putExtra("status", transaction.getStatus());
                     intent.putExtra("type", transaction.getType());
@@ -293,6 +339,58 @@ public class ChildOverviewParentActivity extends AppCompatActivity {
                 this.item = itemView.findViewById(R.id.transactionItemName);
                 this.cost = itemView.findViewById(R.id.transactionCostDetails);
                 this.layout = itemView.findViewById(R.id.transactionHolderLayout);
+            }
+        }
+    }
+
+    private class WishListItemAdapter extends RecyclerView.Adapter<WishListItemAdapter.ItemHolder> {
+
+        private ArrayList<WishListItem> items;
+        public WishListItemAdapter(ArrayList<WishListItem> items) {
+            this.items = items;
+        }
+        @NonNull
+        @Override
+        public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_wish_list_item, parent, false);
+            return new ItemHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+            final WishListItem item = items.get(position);
+            holder.item.setText(item.getItem());
+            holder.cost.setText("$"+item.getCost());
+            holder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ChildOverviewParentActivity.this, WishListItemDetailsParentActivity.class);
+                    intent.putExtra("item", item.getItem());
+                    intent.putExtra("cost", item.getCost());
+                    intent.putExtra("id", item.getItemId());
+                    intent.putExtra("childId", childId);
+                    intent.putExtra("name", getIntent().getExtras().getString("name"));
+                    startActivity(intent);
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return items.size();
+        }
+
+        private class ItemHolder extends RecyclerView.ViewHolder {
+
+            private TextView item;
+            private TextView cost;
+            private LinearLayout layout;
+
+            public ItemHolder(@NonNull View itemView) {
+                super(itemView);
+                this.item = itemView.findViewById(R.id.wishListItem);
+                this.cost = itemView.findViewById(R.id.wishListItemCost);
+                this.layout = itemView.findViewById(R.id.wishListHolderLayout);
             }
         }
     }

@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.piggybank.Firebase.Models.Task;
 import com.example.piggybank.Firebase.Models.Transaction;
 import com.example.piggybank.Firebase.Models.User;
+import com.example.piggybank.Firebase.Models.WishListItem;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -129,6 +130,43 @@ public class Get {
                     transactions.add(task);
                 }
                 onSuccessListener.onSuccess(transactions);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
+
+    //gets an arraylist of wish list items given the user's id
+    public void getWishListItemsByChildId(final String childId,
+                                         final OnSuccessListener<ArrayList<WishListItem>> onSuccessListener,
+                                         final OnFailureListener onFailureListener) {
+        db.collection("wishList").whereEqualTo("childId", childId).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                ArrayList<WishListItem> items = new ArrayList<>();
+                for(QueryDocumentSnapshot docSnapshot : queryDocumentSnapshots)
+                {
+                    WishListItem item = WishListItem.SNAPSHOTPARSER.parseSnapshot(docSnapshot);
+                    items.add(item);
+                }
+                onSuccessListener.onSuccess(items);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
+
+    //gets an arraylist of wish list items given the user's id limited to limit results
+    public void getWishListItemsByChildId(final String childId,
+                                          final int limit,
+                                          final OnSuccessListener<ArrayList<WishListItem>> onSuccessListener,
+                                          final OnFailureListener onFailureListener) {
+        db.collection("wishList").whereEqualTo("childId", childId).limit(limit).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                ArrayList<WishListItem> items = new ArrayList<>();
+                for(QueryDocumentSnapshot docSnapshot : queryDocumentSnapshots)
+                {
+                    WishListItem item = WishListItem.SNAPSHOTPARSER.parseSnapshot(docSnapshot);
+                    items.add(item);
+                }
+                onSuccessListener.onSuccess(items);
             }
         }).addOnFailureListener(onFailureListener);
     }

@@ -26,14 +26,14 @@
     <string name="payment">Payment</string>
     <string name="title_activity_task_details_parent">TaskDetailsParentActivity</string>
     <string name="paymentText">Payment:</string>
-    <string name="mark_task_confirmed_and_pay_due_ammount">Mark Task Confirmed And Pay Due Ammount</string>
+    <string name="mark_task_confirmed_and_pay_due_ammount">Confirm Task And Pay Due Amount</string>
     <string name="temp">temp</string>
     <string name="status">Status:</string>
     <string name="click_on_a_task_to_view_details">Click on a task to view details.</string>
     <string name="see_all_tasks">See All Tasks</string>
     <string name="click_on_a_transaction_to_view_details">Click on a transaction to view details.</string>
     <string name="see_all_transactions">See All Transactions</string>
-    <string name="no_transactions_avaliable">No transactions avaliable</string>
+    <string name="no_transactions_avaliable">No transactions available</string>
     <string name="piggybank">PiggyBank</string>
     <string name="create_child_account">Create Child Account</string>
     <string name="title_activity_transactions_parent">TransactionsParentActivity</string>
@@ -44,4 +44,12 @@
     </string>
     <string name="this_transaction_was_requested_but_not_yet_completed">* This transaction was requested but not yet completed.</string>
     <string name="complete_transaction">Complete Transaction</string>
+    <string name="title_activity_wish_list_parent">WishListParentActivity</string>
+    <string name="click_on_an_item_to_view_details">Click on an item to view details.</string>
+    <string name="no_wish_list_items_avaliable">No wish list items available</string>
+    <string name="wish_list">Wish List:</string>
+    <string name="see_entire_wish_list">See entire wish list</string>
+    <string name="title_activity_wish_list_item_details_parent">WishListItemDetailsParentActivity
+    </string>
+    <string name="delete_this_task">Delete This Task</string>
 </resources>
