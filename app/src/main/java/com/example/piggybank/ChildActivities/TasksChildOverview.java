@@ -74,7 +74,7 @@ public class TasksChildOverview extends AppCompatActivity {
         get.getTasksByChildId(this.childId, new OnSuccessListener<ArrayList<Task>>() {
             @Override
             public void onSuccess(ArrayList<Task> tasks) {
-                TextView text = findViewById(R.id.noTasks2);
+                TextView text = findViewById(R.id.noTasksChild);
 
                 if(tasks.size() == 0)
                     text.setVisibility(View.VISIBLE);

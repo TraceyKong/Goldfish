@@ -34,7 +34,7 @@ public class TaskDetailsChildActivity extends AppCompatActivity {
 
         //title toolbar
         String name = getIntent().getExtras().getString("name");
-        getSupportActionBar().setTitle(name+"'s Tasks");
+        getSupportActionBar().setTitle("My Tasks");
         //set task details to textviews
         TextView taskName = findViewById(R.id.taskDetailedNameChild);
         TextView taskPayment = findViewById(R.id.taskDetailedPaymentChild);
@@ -55,5 +55,29 @@ public class TaskDetailsChildActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void markCompleted(View view) {
+        if(getIntent().getExtras().getString("status").equals("incomplete"))
+        {
+            //mark completed
+            final Post post = new Post();
+            post.markTaskCompleted(getIntent().getExtras().getString("id"), new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    finish();
+                }
+            }, new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    System.out.println(e);
+                }
+            });
+        }
+        else
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), "Task is already marked as completed.", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 }

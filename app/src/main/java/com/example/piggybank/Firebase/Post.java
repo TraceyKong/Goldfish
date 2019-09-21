@@ -61,6 +61,18 @@ public class Post {
         }).addOnFailureListener(onFailureListener);
     }
 
+    //changes a task's status field to completed given the task's id
+    public void markTaskCompleted(final String taskId,
+                                  final OnSuccessListener<Void> onSuccessListener,
+                                  final OnFailureListener onFailureListener) {
+        db.collection("tasks").document(taskId).update("status", "completed").addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                onSuccessListener.onSuccess(aVoid);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
+
     //increments a user's balance by a specified amount given the user's id
     public void sendPaymentToChild(final String childId,
                                    final double payment,
