@@ -123,4 +123,35 @@ public class Post {
             }
         }).addOnFailureListener(onFailureListener);
     }
+
+    //creates a wish list item
+    public void createWishListItem(final String item,
+                                   final double cost,
+                                   final String childId,
+                                   final OnSuccessListener<String> onSuccessListener,
+                                   final OnFailureListener onFailureListener) {
+        Map<String, Object> wish = new HashMap<>();
+        wish.put("item", item);
+        wish.put("cost", cost);
+        wish.put("childId", childId);
+        db.collection("wishList").add(wish).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                onSuccessListener.onSuccess(documentReference.getId());
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
+
+    //deletes a task
+    public void deleteTask(final String taskId,
+                           final OnSuccessListener<Void> onSuccessListener,
+                           final OnFailureListener onFailureListener) {
+        db.collection("tasks").document(taskId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                onSuccessListener.onSuccess(aVoid);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
 }
+

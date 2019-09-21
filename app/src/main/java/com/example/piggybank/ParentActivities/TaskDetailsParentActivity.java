@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import java.text.DecimalFormat;
 
 public class TaskDetailsParentActivity extends AppCompatActivity {
 
+    private String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,8 @@ public class TaskDetailsParentActivity extends AppCompatActivity {
         taskPayment.setText("$"+df.format(getIntent().getExtras().getDouble("payment")));
         taskStatus.setText(getIntent().getExtras().getString("status"));
         taskDescription.setText(getIntent().getExtras().getString("description"));
+
+        this.id = getIntent().getExtras().getString("id");
     }
 
     //if the child has completed the tas this marks the task as confirmed, then adds the payment to the child's balance account, and creates a positive transaction
@@ -92,4 +97,39 @@ public class TaskDetailsParentActivity extends AppCompatActivity {
             toast.show();
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_delete_task:
+                deleteTask();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void deleteTask() {
+        Post post = new Post();
+        post.deleteTask(id, new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                finish();
+            }
+        }, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println(e);
+            }
+        });
+    }
+
 }
