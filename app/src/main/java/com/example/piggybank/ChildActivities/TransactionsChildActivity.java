@@ -135,7 +135,7 @@ public class TransactionsChildActivity extends AppCompatActivity {
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(TransactionsChildActivity.this, TransactionDetailsParentActivity.class);
+                    Intent intent = new Intent(TransactionsChildActivity.this, TransactionDetailsChildActivity.class);
                     intent.putExtra("item", transaction.getItem());
                     intent.putExtra("status", transaction.getStatus());
                     intent.putExtra("type", transaction.getType());
