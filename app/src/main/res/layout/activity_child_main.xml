@@ -249,6 +249,7 @@
                     android:drawableEnd="@drawable/ic_keyboard_arrow_down_black_18dp"
                     android:minWidth="0dip"
                     android:minHeight="0dip"
+                    android:onClick="openWishListActivity"
                     android:text="@string/see_entire_wish_list"
                     android:textColor="@color/design_default_color_primary"
                     android:textSize="12sp" />
