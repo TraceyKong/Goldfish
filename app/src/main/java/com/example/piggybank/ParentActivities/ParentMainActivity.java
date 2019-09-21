@@ -39,10 +39,6 @@ public class ParentMainActivity extends AppCompatActivity {
         //title toolbar
         getSupportActionBar().setTitle("Children");
 
-        //add return button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         //setup recyclerview
         recyclerView = findViewById(R.id.childrenRV);
         layoutManager = new LinearLayoutManager(this);
