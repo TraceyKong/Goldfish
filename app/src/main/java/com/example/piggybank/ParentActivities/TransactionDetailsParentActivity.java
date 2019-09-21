@@ -113,4 +113,19 @@ public class TransactionDetailsParentActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void cancelTransaction(View view) {
+        Post post = new Post();
+        post.deleteTransaction(getIntent().getExtras().getString("id"), new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                finish();
+            }
+        }, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println(e);
+            }
+        });
+    }
 }

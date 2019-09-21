@@ -95,17 +95,37 @@
                 android:text="@string/this_transaction_was_requested_but_not_yet_completed"
                 android:textColor="@color/design_default_color_primary" />
 
-            <Button
-                android:id="@+id/completeTransactionButton"
-                style="@android:style/Widget.Material.Light.Button.Borderless"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:onClick="completeTransaction"
-                android:text="@string/complete_transaction"
-                android:textColor="@color/design_default_color_primary" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/completeTransactionButton"
+                    style="@android:style/Widget.Material.Light.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:onClick="completeTransaction"
+                    android:text="@string/complete_transaction"
+                    android:textColor="@color/design_default_color_primary" />
+
+                <Button
+                    android:id="@+id/deleteTransactionButton"
+                    style="@android:style/Widget.Material.Light.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:onClick="cancelTransaction"
+                    android:text="@string/fui_cancel"
+                    android:textColor="@color/fui_bgEmail" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
