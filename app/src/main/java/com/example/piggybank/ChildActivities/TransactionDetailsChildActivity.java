@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,6 +28,11 @@ public class TransactionDetailsChildActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //title toolbar
         getSupportActionBar().setTitle("Transactions");
+
+        //add return button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         //set task details to textviews
         TextView item = findViewById(R.id.transactionItemNameDetailsChild);
         TextView date = findViewById(R.id.transactionDateDetailsChild);
@@ -55,6 +61,17 @@ public class TransactionDetailsChildActivity extends AppCompatActivity {
         {
             layout.setVisibility(View.GONE);
         }
+    }
+
+    //returns to previous page
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
