@@ -51,4 +51,5 @@
     <string name="title_activity_wish_list_item_details_parent">WishListItemDetailsParentActivity
     </string>
     <string name="delete_this_task">Delete This Task</string>
+    <string name="logout">Log Out</string>
 </resources>
