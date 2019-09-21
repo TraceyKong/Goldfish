@@ -153,5 +153,17 @@ public class Post {
             }
         }).addOnFailureListener(onFailureListener);
     }
+
+    //deletes a transaction
+    public void deleteTransaction(final String transactionId,
+                           final OnSuccessListener<Void> onSuccessListener,
+                           final OnFailureListener onFailureListener) {
+        db.collection("transactions").document(transactionId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                onSuccessListener.onSuccess(aVoid);
+            }
+        }).addOnFailureListener(onFailureListener);
+    }
 }
 
