@@ -9,6 +9,10 @@ import com.example.piggybank.Firebase.Models.Task;
 import com.example.piggybank.Firebase.Models.Transaction;
 import com.example.piggybank.Firebase.Models.User;
 import com.example.piggybank.Firebase.Models.WishListItem;
+import com.example.piggybank.ParentActivities.ChildOverviewParentActivity;
+import com.example.piggybank.ParentActivities.TasksParentActivity;
+import com.example.piggybank.ParentActivities.TransactionsParentActivity;
+import com.example.piggybank.ParentActivities.WishListParentActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -25,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.piggybank.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -55,7 +60,7 @@ public class ChildMainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Overview");
 
-        this.childId = getIntent().getExtras().getString("childId");
+        this.childId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         recyclerViewTasks = findViewById(R.id.tasksRVChild);
         layoutManagerTasks = new LinearLayoutManager(this);
@@ -103,6 +108,33 @@ public class ChildMainActivity extends AppCompatActivity {
                 System.out.println(e);
             }
         });
+    }
+
+    //opens the TasksParentActivity
+    public void openTasksActivity(View view) {
+        Intent intent = new Intent(ChildMainActivity.this, TasksChildActivity.class);
+        String name = getIntent().getExtras().getString("name");
+        intent.putExtra("name", name);
+        intent.putExtra("childId", childId);
+        startActivity(intent);
+    }
+
+    //opens the TransactionsParentActivity
+    public void openTransactionsActivity(View view) {
+        Intent intent = new Intent(ChildMainActivity.this, TransactionsChildActivity.class);
+        String name = getIntent().getExtras().getString("name");
+        intent.putExtra("name", name);
+        intent.putExtra("childId", childId);
+        startActivity(intent);
+    }
+
+    //opens the WishListParentActivity
+    public void openWishListActivity(View view) {
+        Intent intent = new Intent(ChildMainActivity.this, WishListChildActivity.class);
+        String name = getIntent().getExtras().getString("name");
+        intent.putExtra("name", name);
+        intent.putExtra("childId", childId);
+        startActivity(intent);
     }
 
     //creates the recycler view for tasks with a maximum limit of the LIMIT latest tasks
